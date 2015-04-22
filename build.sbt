@@ -1,21 +1,11 @@
-
-
 name := "sparklefe"
 
 version := "1.0"
 
-javacOptions ++= Seq("-source", "1.8", "-target", "1.8")
+lazy val `sparklefe` = (project in file(".")).enablePlugins(PlayScala).enablePlugins(PlayJava)
 
-libraryDependencies ++= Seq(
-  "org.webjars" %% "webjars-play" % "2.2.0",
-  "org.webjars" % "bootstrap" % "2.3.1",
-  javaWs
-)
+scalaVersion := "2.11.1"
 
-playJavaSettings
+libraryDependencies ++= Seq(jdbc, anorm, cache, ws)
 
-initialize := {
-  val _ = initialize.value
-  if (sys.props("java.specification.version") != "1.8")
-    sys.error("Java 8 is required for this project.")
-}
+unmanagedResourceDirectories in Test <+= baseDirectory(_ / "target/web/public/test")
