@@ -1,7 +1,19 @@
-@(message: String)
+@(message: String)(uri: String)
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message)
+    <script src="@routes.Assets.at("javascripts/app.js")"></script>
 
+    <div class="well">
+        <h1>@message</h1>
+    </div>
+
+    Demos:
+    <ul>
+        <li><a href="">Reactive Composition</a></li>
+    </ul>
+
+    <button class="btn btn-info btn-lg" id="sse-demo">Connect to Server Sent Event Channel</button>
+
+    <button class="btn btn-info btn-lg" id="websocket-demo">Send WebSocket Message</button>
 }
