@@ -1,19 +1,12 @@
-@(message: String)(uri: String)
+@(title: String, uri: String, contents: List[model.Content])
 
-@main("Welcome to Play") {
+@main(title, uri) {
 
-    <script src="@routes.Assets.at("javascripts/app.js")"></script>
-
-    <div class="well">
-        <h1>@message</h1>
-    </div>
-
-    Demos:
-    <ul>
-        <li><a href="">Reactive Composition</a></li>
-    </ul>
-
-    <button class="btn btn-info btn-lg" id="sse-demo">Connect to Server Sent Event Channel</button>
-
-    <button class="btn btn-info btn-lg" id="websocket-demo">Send WebSocket Message</button>
+    @for(content <- contents) {
+        <article>
+            <h2>@content.getTitle</h2>
+            <p>@content.getSummary</p>
+            <p><a href="@content.getUri">Read more...</a></p>
+        </article>
+    }
 }

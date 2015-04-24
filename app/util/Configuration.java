@@ -27,14 +27,6 @@ public class Configuration {
         return instance;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public Site getSite() {
-        return site;
-    }
-
     public void loadData() {
         WSRequestHolder userRequest = WS.url(String.format("%s/public/user", WS_URL));
         WSRequestHolder siteRequest = WS.url(String.format("%s/api/site", WS_URL));
@@ -50,5 +42,17 @@ public class Configuration {
                             });
                     return user;
                 });
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Site getSite() {
+        return site;
+    }
+
+    public String getSiteName() {
+        return (site == null ? "" : site.getName());
     }
 }

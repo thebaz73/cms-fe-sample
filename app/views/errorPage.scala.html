@@ -1,0 +1,10 @@
+@(title: String)(t: Throwable)
+
+@main(title, "") {
+
+    <script src="@routes.Assets.at("javascripts/app.js")"></script>
+
+    <div class="well">
+        <h1>Sparkle CMS Error page <small>@t.getLocalizedMessage</small></h1>
+    </div>
+}
