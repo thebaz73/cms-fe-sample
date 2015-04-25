@@ -44,11 +44,17 @@ public class Configuration {
                 });
     }
 
-    public User getUser() {
+    public User getUser() throws ConfigurationException {
+        if (user == null) {
+            throw new ConfigurationException("User is null");
+        }
         return user;
     }
 
-    public Site getSite() {
+    public Site getSite() throws ConfigurationException {
+        if (site == null) {
+            throw new ConfigurationException("Site is null");
+        }
         return site;
     }
 

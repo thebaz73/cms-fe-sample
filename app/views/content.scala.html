@@ -1,12 +1,10 @@
-@(title: String, uri: String, contents: java.util.List[model.Content])
+@(title: String, uri: String, content: model.Content)
 
-@main(title, uri) {
+    @main(title, uri) {
 
-    @for(content <- contents) {
         <article>
             <h2>@content.getTitle</h2>
             <p>@content.getSummary</p>
             <p><a href="@content.getUri">Read more...</a></p>
         </article>
     }
-}

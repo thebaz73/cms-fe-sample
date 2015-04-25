@@ -14,6 +14,12 @@ import static play.mvc.Results.*;
  */
 public class Global extends GlobalSettings {
 
+    private final Configuration configuration;
+
+    public Global() {
+        configuration = Configuration.getInstance();
+    }
+
     @Override
     public F.Promise<Result> onBadRequest(RequestHeader request, String error) {
         return F.Promise.<Result>pure(badRequest("Don't try to hack the URI!"));
@@ -22,21 +28,21 @@ public class Global extends GlobalSettings {
     @Override
     public F.Promise<Result> onHandlerNotFound(RequestHeader request) {
         return F.Promise.<Result>pure(notFound(
-                views.html.notFoundPage.render(Configuration.getInstance().getSiteName(), request.uri())
+                views.html.notFoundPage.render(configuration.getSiteName(), request.uri())
         ));
     }
 
     @Override
     public F.Promise<Result> onError(RequestHeader request, Throwable t) {
         return F.Promise.<Result>pure(internalServerError(
-                views.html.errorPage.render(Configuration.getInstance().getSiteName(), t)
+                views.html.errorPage.render(configuration.getSiteName(), t)
         ));
     }
 
     @Override
     public void onStart(Application application) {
         Logger.info("Sparkle FrontEnd starting...");
-        Configuration.getInstance().loadData();
+        configuration.loadData();
         super.onStart(application);
     }
 }
