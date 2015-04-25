@@ -1,10 +1,29 @@
-@(title: String, uri: String, content: model.Content)
+@(title: String, uri: String, user: model.User, site: model.Site, content: model.Content)
 
-    @main(title, uri) {
+@main(title, site.getName, user.getName) {
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('assets/images/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>@content.getTitle</h1>
+                        <h2 class="subheading">@content.getSummary</h2>
+                        <span class="meta">Posted by <a href="contents/by-user/@user.getId">@user.getName</a> on @content.getModificationDate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-        <article>
-            <h2>@content.getTitle</h2>
-            <p>@content.getSummary</p>
-            <p><a href="@content.getUri">Read more...</a></p>
-        </article>
-    }
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    @Html(content.getContent)
+                </div>
+            </div>
+        </div>
+    </article>
+}

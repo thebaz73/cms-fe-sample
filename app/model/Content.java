@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class Content {
     private String name;
     private String title;
     private String uri;
-    private Long modificationDate;
+    private Date modificationDate;
     private String summary;
     private String content;
     private List<Asset> assets;
@@ -67,11 +68,11 @@ public class Content {
         this.uri = uri;
     }
 
-    public Long getModificationDate() {
+    public Date getModificationDate() {
         return modificationDate;
     }
 
-    public void setModificationDate(Long modificationDate) {
+    public void setModificationDate(Date modificationDate) {
         this.modificationDate = modificationDate;
     }
 

@@ -26,43 +26,25 @@ import java.util.List;
  * </pre>
  */
 public class ContentPage {
-    private List<PageLink> links;
-    private List<Content> content;
-    private PageMetadata pageMetadata;
+    private List<Content> cmsContents;
 
-    public List<PageLink> getLinks() {
-        return links;
+    public List<Content> getCmsContents() {
+        return cmsContents;
     }
 
-    public void setLinks(List<PageLink> links) {
-        this.links = links;
-    }
-
-    public List<Content> getContent() {
-        return content;
-    }
-
-    public void setContent(List<Content> content) {
-        this.content = content;
-    }
-
-    public PageMetadata getPageMetadata() {
-        return pageMetadata;
-    }
-
-    public void setPageMetadata(PageMetadata pageMetadata) {
-        this.pageMetadata = pageMetadata;
+    public void setCmsContents(List<Content> cmsContents) {
+        this.cmsContents = cmsContents;
     }
 
     public List<Content> toContentList() {
-        return content;
+        return cmsContents;
     }
 
     public Content toContent() {
-        return content.get(0);
+        return cmsContents.get(0);
     }
 
     public int size() {
-        return pageMetadata.getSize();
+        return cmsContents.size();
     }
 }
