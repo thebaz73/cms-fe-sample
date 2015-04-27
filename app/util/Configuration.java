@@ -2,10 +2,14 @@ package util;
 
 import model.Site;
 import model.User;
+import play.libs.F;
 import play.libs.Json;
 import play.libs.ws.WS;
 import play.libs.ws.WSAuthScheme;
 import play.libs.ws.WSRequestHolder;
+import play.libs.ws.WSResponse;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Config
@@ -30,6 +34,15 @@ public class Configuration {
     public void loadData() {
         WSRequestHolder userRequest = WS.url(String.format("%s/public/user", WS_URL));
         WSRequestHolder siteRequest = WS.url(String.format("%s/api/site", WS_URL));
+
+//        F.Promise<WSResponse> userResponse = userRequest.setQueryParameter("param", "bazzoni.marco@gmail.com").get();
+//        user = Json.fromJson(userResponse.get(5, TimeUnit.SECONDS).asJson(), User.class);
+//
+//        F.Promise<WSResponse> siteResponse = siteRequest.setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
+//                .setQueryParameter("param", "halfblood.com")
+//                .get();
+//        site = Json.fromJson(siteResponse.get(5, TimeUnit.SECONDS).asJson(), Site.class);
+
         userRequest.setQueryParameter("param", "bazzoni.marco@gmail.com").get()
                 .map(userResponse -> {
                     user = Json.fromJson(userResponse.asJson(), User.class);

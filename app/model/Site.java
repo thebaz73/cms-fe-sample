@@ -9,6 +9,7 @@ import java.util.List;
 public class Site {
     private String id;
     private String name;
+    private String motto;
     private Long creationDate;
     private String address;
     private String workflowType;
@@ -29,6 +30,14 @@ public class Site {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMotto() {
+        return motto;
+    }
+
+    public void setMotto(String motto) {
+        this.motto = motto;
     }
 
     public Long getCreationDate() {

@@ -14,6 +14,7 @@ public class Content {
     private String name;
     private String title;
     private String uri;
+    private boolean published;
     private Date modificationDate;
     private String summary;
     private String content;
@@ -66,6 +67,14 @@ public class Content {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 
     public Date getModificationDate() {

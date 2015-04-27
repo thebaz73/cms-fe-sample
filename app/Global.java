@@ -1,10 +1,14 @@
 import play.Application;
 import play.GlobalSettings;
 import play.Logger;
+import play.libs.Akka;
 import play.libs.F;
 import play.mvc.Http.RequestHeader;
 import play.mvc.Result;
+import scala.concurrent.duration.Duration;
 import util.Configuration;
+
+import java.util.concurrent.TimeUnit;
 
 import static play.mvc.Results.*;
 
@@ -42,7 +46,13 @@ public class Global extends GlobalSettings {
     @Override
     public void onStart(Application application) {
         Logger.info("Sparkle FrontEnd starting...");
-        configuration.loadData();
+        Akka.system().scheduler().schedule(
+                Duration.create(0, TimeUnit.MILLISECONDS),
+                Duration.create(10, TimeUnit.MILLISECONDS),
+                (Runnable) configuration::loadData,
+                Akka.system().dispatcher()
+        );
+
         super.onStart(application);
     }
 }
