@@ -25,7 +25,7 @@ public class Application extends Controller {
     private static Configuration configuration = Configuration.getInstance();
 
     public static Result index() throws ConfigurationException {
-        return show("/");
+        return show("contents/");
     }
 
     public static Result show(String uri) throws ConfigurationException {
@@ -35,7 +35,7 @@ public class Application extends Controller {
         if(uri.equals("contact")) {
             return ok(views.html.contact.render(site.getName(), "", user, site));
         }
-        else if (uri.equals("/") || uri.startsWith("/?")) {
+        else if (uri.equals("contents/") || uri.startsWith("contents/?")) {
             serviceUrl = String.format("%s/api/contents/%s", WS_URL, site.getId());
         } else {
             serviceUrl = String.format("%s/api/contents/%s/%s", WS_URL, site.getId(), uri);
