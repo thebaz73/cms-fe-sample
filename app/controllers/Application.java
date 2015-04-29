@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * Application
  * Created by thebaz on 23/04/15.
  */
-public class Application extends Controller {
+public class Application extends SparkleController {
     private static final String WS_URL = "http://ec2-52-17-75-152.eu-west-1.compute.amazonaws.com";
     private static Configuration configuration = Configuration.getInstance();
 
@@ -43,8 +43,7 @@ public class Application extends Controller {
         F.Promise<WSResponse> response = WS.url(serviceUrl)
                 .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                 .get();
-        JsonNode embedded = response.get(5, TimeUnit.SECONDS).asJson().get("_embedded");
-        ContentPage contents = Json.fromJson(embedded, ContentPage.class);
+        ContentPage contents = toContentPage(response);
         if (uri.equals("contents/") || uri.startsWith("contents/?")) {
             return ok(views.html.index.render(site.getName(), "", user, site, contents.toContentList()));
         } else {

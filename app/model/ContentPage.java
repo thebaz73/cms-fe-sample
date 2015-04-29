@@ -2,6 +2,7 @@ package model;
 
 //import scala.collection.immutable.List;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ import java.util.List;
  * </pre>
  */
 public class ContentPage {
-    private List<Content> cmsContents;
+    private List<Content> cmsContents = new ArrayList<>();
 
     public List<Content> getCmsContents() {
         return cmsContents;
