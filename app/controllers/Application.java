@@ -45,7 +45,7 @@ public class Application extends Controller {
                 .get();
         JsonNode embedded = response.get(5, TimeUnit.SECONDS).asJson().get("_embedded");
         ContentPage contents = Json.fromJson(embedded, ContentPage.class);
-        if (uri.equals("/") || uri.startsWith("/?")) {
+        if (uri.equals("contents/") || uri.startsWith("contents/?")) {
             return ok(views.html.index.render(site.getName(), "", user, site, contents.toContentList()));
         } else {
             return ok(views.html.content.render(site.getName(), "", user, site, contents.toContent()));
