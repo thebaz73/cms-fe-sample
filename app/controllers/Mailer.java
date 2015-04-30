@@ -1,6 +1,5 @@
 package controllers;
 
-import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;

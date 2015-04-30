@@ -1,20 +1,14 @@
 package controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import model.ContentPage;
 import model.Site;
 import model.User;
 import play.libs.F;
-import play.libs.Json;
 import play.libs.ws.WS;
 import play.libs.ws.WSAuthScheme;
 import play.libs.ws.WSResponse;
-import play.mvc.Controller;
 import play.mvc.Result;
 import util.Configuration;
 import util.ConfigurationException;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Application
@@ -28,12 +22,12 @@ public class Application extends SparkleController {
         return show("contents/");
     }
     public static Result about() {
-        return show("contents/about");
+        return show("/about");
     }
 
     public static Result contact() {
-        User user = null;
-        Site site = null;
+        User user;
+        Site site;
         try {
             user = configuration.getUser();
             site = configuration.getSite();
@@ -45,8 +39,8 @@ public class Application extends SparkleController {
     }
 
     public static Result show(String uri) {
-        User user = null;
-        Site site = null;
+        User user;
+        Site site;
         F.Promise<WSResponse> response = null;
         try {
             user = configuration.getUser();
@@ -64,6 +58,10 @@ public class Application extends SparkleController {
             user = new User();
             site = new Site();
         }
-        return ok(views.html.index.render(site.getName(), "", user, site, toContentPage(response)));
+        if (uri.equals("contents/") || uri.startsWith("contents/?")) {
+            return ok(views.html.index.render(site.getName(), "", user, site, toContentPage(response)));
+        } else {
+            return ok(views.html.content.render(site.getName(), "", user, site, toContentPage(response)));
+        }
     }
 }

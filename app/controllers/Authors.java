@@ -1,7 +1,5 @@
 package controllers;
 
-import model.Content;
-import model.ContentPage;
 import model.Site;
 import model.User;
 import play.libs.F;
@@ -12,8 +10,6 @@ import play.mvc.Result;
 import util.Configuration;
 import util.ConfigurationException;
 
-import java.util.List;
-
 /**
  * SearchEngine
  * Created by bazzoni on 29/04/2015.
@@ -23,8 +19,8 @@ public class Authors extends SparkleController {
     private static Configuration configuration = Configuration.getInstance();
 
     public static Result show(String id) throws ConfigurationException {
-        User user = null;
-        Site site = null;
+        User user;
+        Site site;
         F.Promise<WSResponse> response = null;
         try {
             user = configuration.getUser();
