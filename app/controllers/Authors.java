@@ -26,7 +26,7 @@ public class Authors extends SparkleController {
             user = configuration.getUser();
             site = configuration.getSite();
 
-            String serviceUrl = String.format("%s/api/authors/%s", WS_URL, user.getId());
+            String serviceUrl = String.format("%s/api/authors/%s/%s", WS_URL, site.getId(), id);
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();

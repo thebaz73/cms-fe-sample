@@ -25,7 +25,7 @@ public class SearchEngine extends SparkleController {
         try {
             user = configuration.getUser();
             site = configuration.getSite();
-            String serviceUrl = String.format("%s/api/search/%s", WS_URL, user.getId());
+            String serviceUrl = String.format("%s/api/search?q=%s", WS_URL, q);
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();
