@@ -1,4 +1,4 @@
-@(title: String, uri: String, user: model.User, site: model.Site, contents: java.util.List[model.Content])
+@(title: String, uri: String, user: model.User, site: model.Site, contents: model.ContentPage)
 
 @main(title, site.getName, user.getName) {
     <!-- Set your background image for this header on the line below. -->
@@ -19,7 +19,7 @@
     <div class="container">
 
         <div class="row">
-        @for(content <- contents) {
+        @for(content <- contents.toContentList) {
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-preview">
                     <a href="/contents/@content.getUri">

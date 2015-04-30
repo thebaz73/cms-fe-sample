@@ -11,9 +11,9 @@ import play.mvc.Result;
  */
 public class Mailer extends Controller {
 
-    @BodyParser.Of(BodyParser.Json.class)
     public static Result send() {
         Http.RequestBody body = request().body();
+        //Logger.debug(body.asJson());
         return ok("Got json: " + body.asJson());
     }
 }

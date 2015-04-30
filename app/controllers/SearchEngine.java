@@ -23,12 +23,19 @@ public class SearchEngine extends SparkleController {
     private static Configuration configuration = Configuration.getInstance();
 
     public static Result search(String q) throws ConfigurationException {
-        User user = configuration.getUser();
-        Site site = configuration.getSite();
-        String serviceUrl = String.format("%s/api/authors/%s", WS_URL, user.getId());
-        F.Promise<WSResponse> response = WS.url(serviceUrl)
-                .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
-                .get();
-        ContentPage contents = toContentPage(response);
-        return ok(views.html.search.render(site.getName(), "", user, site, contents.toContentList()));
+        User user = null;
+        Site site = null;
+        F.Promise<WSResponse> response = null;
+        try {
+            user = configuration.getUser();
+            site = configuration.getSite();
+            String serviceUrl = String.format("%s/api/authors/%s", WS_URL, user.getId());
+            response = WS.url(serviceUrl)
+                    .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
+                    .get();
+        } catch (ConfigurationException e) {
+            user = new User();
+            site = new Site();
+        }
+        return ok(views.html.search.render(site.getName(), "", user, site, toContentPage(response)));
     }}

@@ -5,6 +5,8 @@
 # Home page
 GET        /                     controllers.Application.index()
 # Extract the page parameter from the path.
+GET        /contact              controllers.Application.contact()
+GET        /about                controllers.Application.about()
 GET        /contents/:uri        controllers.Application.show(uri)
 GET        /authors/:id          controllers.Authors.show(id)
 
