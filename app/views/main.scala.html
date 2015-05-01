@@ -22,10 +22,12 @@
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
             <!--[if lt IE 9]>
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("html5shiv.js"))"></script>
-        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("respond.min.js"))"></script>
+        <script; src="@routes.WebJarAssets.at(WebJarAssets.locate("respond.min.js;"))">;</script>
         <![endif]-->
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
 
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/clean-blog.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jqcloud.css")"/>
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
     <body>
@@ -116,7 +118,6 @@
         <form id="hidden" role="form" class="hidden" method="get" action="/search">
             <input type="hidden" id="query" name="q"/>
         </form>
-        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("bootswatch-yeti", "bootstrap.min.js"))"></script>
 
         @*<script src="@routes.Assets.at("javascripts/clean-blog.min.js")"></script>*@

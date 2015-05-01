@@ -2,6 +2,7 @@ package controllers;
 
 import model.Site;
 import model.User;
+import play.Logger;
 import play.libs.F;
 import play.libs.ws.WS;
 import play.libs.ws.WSAuthScheme;
@@ -32,6 +33,7 @@ public class Application extends SparkleController {
             user = configuration.getUser();
             site = configuration.getSite();
         } catch (ConfigurationException e) {
+            Logger.error("Getting contact content", e);
             user = new User();
             site = new Site();
         }
@@ -55,6 +57,7 @@ public class Application extends SparkleController {
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();
         } catch (ConfigurationException e) {
+            Logger.error("Getting contents: " + uri, e);
             user = new User();
             site = new Site();
         }

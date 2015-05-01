@@ -28,6 +28,7 @@ import java.util.List;
  */
 public class ContentPage {
     private List<Content> cmsContents = new ArrayList<>();
+    private Tag tag = new Tag();
 
     public List<Content> getCmsContents() {
         return cmsContents;
@@ -37,12 +38,20 @@ public class ContentPage {
         this.cmsContents = cmsContents;
     }
 
+    public Tag getTag() {
+        return tag;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
+
     public List<Content> toContentList() {
         return cmsContents;
     }
 
     public Content toContent() {
-        return cmsContents.get(0);
+        return cmsContents.isEmpty() ? new Content() : cmsContents.get(0);
     }
 
     public int size() {

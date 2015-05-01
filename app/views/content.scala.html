@@ -17,13 +17,12 @@
     </header>
 
     <!-- Post Content -->
-    <article>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    @Html(content.toContent.getContent)
-                </div>
-            </div>
+    <div class="container">
+        <div class="row">
+            <article class="col-lg-7 col-md-10 col-md-offset-1">
+            @Html(content.toContent.getContent)
+            </article>
+            @sparkle.component.tagcloud.render("col-sm-3 col-md-3 well", site)
         </div>
-    </article>
+    </div>
 }

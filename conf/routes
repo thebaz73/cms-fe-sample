@@ -9,6 +9,8 @@ GET        /contact              controllers.Application.contact()
 GET        /about                controllers.Application.about()
 GET        /contents/:uri        controllers.Application.show(uri)
 GET        /authors/:id          controllers.Authors.show(id)
+GET        /tags             controllers.Tags.tags()
+GET        /tags/:tag        controllers.Tags.show(tag)
 
 POST       /sendMail             controllers.Mailer.send()
 GET        /search               controllers.SearchEngine.search(q)

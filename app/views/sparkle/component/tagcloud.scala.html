@@ -1,0 +1,28 @@
+@(keywordClass: String, site: model.Site)
+
+<div id="keywords-@site.getId" class="@keywordClass"></div>
+<script src="@routes.Assets.at("javascripts/jqcloud.min.js")"></script>
+<script type="application/javascript">
+    var words = [];
+    words = [
+        {text: 'Magic', weight: 1.0, link: '/tags/magic'},
+        {text: 'Half Blood', weight: -3, link: '/tags/half_blood'},
+        {text: 'Lord Voldemort', weight: -0.55, link: '/tags/lord_voldemort'},
+        {text: 'Harry Potter', weight: 2.0, link: '/tags/harry_potter'}
+    ];
+    $.ajax({
+        url: "/tags/@site.getId",
+        type: "GET",
+        dataType: "json",
+        cache: false,
+        success: function(data) {
+            words = data;
+        }
+    });
+
+    var selector = '#keywords-@site.getId';
+    $(selector).jQCloud(words,{
+        height: 180,
+        removeOverflowing: false
+    });
+</script>
