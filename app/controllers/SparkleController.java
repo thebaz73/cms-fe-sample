@@ -17,7 +17,7 @@ public class SparkleController extends Controller {
     protected static ContentPage toContentPage(F.Promise<WSResponse> response) {
         ContentPage contents = new ContentPage();
         if(response != null) {
-            WSResponse wsResponse = response.get(5, TimeUnit.SECONDS);
+            WSResponse wsResponse = response.get(30, TimeUnit.SECONDS);
             if(wsResponse.getStatus() == 200) {
                 JsonNode embedded = wsResponse.asJson().get("_embedded");
                 contents = Json.fromJson(embedded, ContentPage.class);
