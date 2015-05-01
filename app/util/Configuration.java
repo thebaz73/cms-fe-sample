@@ -2,14 +2,10 @@ package util;
 
 import model.Site;
 import model.User;
-import play.libs.F;
 import play.libs.Json;
 import play.libs.ws.WS;
 import play.libs.ws.WSAuthScheme;
 import play.libs.ws.WSRequestHolder;
-import play.libs.ws.WSResponse;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Config
