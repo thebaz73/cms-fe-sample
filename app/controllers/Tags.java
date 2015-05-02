@@ -24,7 +24,7 @@ public class Tags extends SparkleController {
     public static Result tags() throws ConfigurationException {
         User user;
         Site site;
-        F.Promise<WSResponse> response = null;
+        F.Promise<WSResponse> response;
         try {
             user = configuration.getUser();
             site = configuration.getSite();
@@ -48,14 +48,13 @@ public class Tags extends SparkleController {
             user = configuration.getUser();
             site = configuration.getSite();
 
-            String serviceUrl = String.format("%s/api/tags/%s/%s", WS_URL, site.getId(), tag);
+            String serviceUrl = String.format("%s/api/contents/%s?tag=%s", WS_URL, site.getId(), tag);
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();
         } catch (ConfigurationException e) {
             Logger.error("Getting tag contents", e);
-            user = new User();
-            site = new Site();
+            return ok(views.html.notReady.render(configuration.getSiteName()));
         }
         return ok(views.html.tags.render(site.getName(), "", user, site, toContentPage(response)));
     }

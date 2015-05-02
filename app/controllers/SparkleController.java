@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import model.ContentList;
 import model.ContentPage;
 import play.libs.F;
 import play.libs.Json;
@@ -19,8 +20,14 @@ public class SparkleController extends Controller {
         if(response != null) {
             WSResponse wsResponse = response.get(30, TimeUnit.SECONDS);
             if(wsResponse.getStatus() == 200) {
-                JsonNode embedded = wsResponse.asJson().get("_embedded");
-                contents = Json.fromJson(embedded, ContentPage.class);
+                JsonNode jsonNode = wsResponse.asJson();
+                JsonNode embedded = jsonNode.get("_embedded");
+                if(embedded != null) {
+                    contents = Json.fromJson(embedded, ContentPage.class);
+                }
+                else {
+                    contents.setCmsContents(Json.fromJson(jsonNode, ContentList.class));
+                }
             }
         }
         return contents;

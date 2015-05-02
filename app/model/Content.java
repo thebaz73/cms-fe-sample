@@ -89,6 +89,10 @@ public class Content {
         return summary;
     }
 
+    public String getSummary(int size) {
+        return summary.length()<size?summary:summary.substring(0,size).concat("...");
+    }
+
     public void setSummary(String summary) {
         this.summary = summary;
     }

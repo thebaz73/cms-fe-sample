@@ -21,14 +21,7 @@
         <div class="row">
             <div class="col-lg-7 col-md-10 col-md-offset-1">
             @for(content <- contents.toContentList) {
-                <div class="post-preview">
-                    <a href="/contents/@content.getUri">
-                        <h2 class="post-title">@content.getTitle</h2>
-                        <h3 class="post-subtitle">@Html(content.getSummary)</h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="/authors/@user.getId">@user.getName</a> on @content.getModificationDate</p>
-                </div>
-                <hr/>
+                @sparkle.component.summary.render(content, user, site)
             }
             </div>
             @sparkle.component.tagcloud.render("col-sm-3 col-md-3 well", site)

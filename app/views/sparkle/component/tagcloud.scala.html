@@ -4,25 +4,25 @@
 <script src="@routes.Assets.at("javascripts/jqcloud.min.js")"></script>
 <script type="application/javascript">
     var words = [];
-    words = [
-        {text: 'Magic', weight: 1.0, link: '/tags/magic'},
-        {text: 'Half Blood', weight: -3, link: '/tags/half_blood'},
-        {text: 'Lord Voldemort', weight: -0.55, link: '/tags/lord_voldemort'},
-        {text: 'Harry Potter', weight: 2.0, link: '/tags/harry_potter'}
-    ];
+    var selector = '#keywords-@site.getId';
     $.ajax({
-        url: "/tags/@site.getId",
+        url: "/tags",
         type: "GET",
         dataType: "json",
         cache: false,
         success: function(data) {
-            words = data;
+            for(var i = 0; i <  data.length; i++) {
+                var word = {};
+                word.text = data[i].tag;
+                word.weight = data[i].popularity;
+                word.link = "/tags/" + data[i].uri;
+                words.push(word);
+            }
+            $(selector).jQCloud(words,{
+                height: 180,
+                removeOverflowing: false
+            });
         }
     });
 
-    var selector = '#keywords-@site.getId';
-    $(selector).jQCloud(words,{
-        height: 180,
-        removeOverflowing: false
-    });
 </script>

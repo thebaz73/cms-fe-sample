@@ -34,8 +34,7 @@ public class Application extends SparkleController {
             site = configuration.getSite();
         } catch (ConfigurationException e) {
             Logger.error("Getting contact content", e);
-            user = new User();
-            site = new Site();
+            return ok(views.html.notReady.render(configuration.getSiteName()));
         }
         return ok(views.html.contact.render(site.getName(), "", user, site));
     }
@@ -58,8 +57,7 @@ public class Application extends SparkleController {
                     .get();
         } catch (ConfigurationException e) {
             Logger.error("Getting contents: " + uri, e);
-            user = new User();
-            site = new Site();
+            return ok(views.html.notReady.render(configuration.getSiteName()));
         }
         if (uri.equals("contents/") || uri.startsWith("contents/?")) {
             return ok(views.html.index.render(site.getName(), "", user, site, toContentPage(response)));

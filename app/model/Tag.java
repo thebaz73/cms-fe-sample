@@ -10,8 +10,9 @@ public class Tag {
     private String id;
     private String siteId;
     private String tag;
+    private String uri;
     private Integer popularity;
-    private Set<String> commentIds;
+    private Set<String> contentIds;
 
     public String getId() {
         return id;
@@ -37,6 +38,14 @@ public class Tag {
         this.tag = tag;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     public Integer getPopularity() {
         return popularity;
     }
@@ -45,11 +54,11 @@ public class Tag {
         this.popularity = popularity;
     }
 
-    public Set<String> getCommentIds() {
-        return commentIds;
+    public Set<String> getContentIds() {
+        return contentIds;
     }
 
-    public void setCommentIds(Set<String> commentIds) {
-        this.commentIds = commentIds;
+    public void setContentIds(Set<String> contentIds) {
+        this.contentIds = contentIds;
     }
 }

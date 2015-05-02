@@ -33,8 +33,7 @@ public class Authors extends SparkleController {
                     .get();
         } catch (ConfigurationException e) {
             Logger.error("Getting author contents", e);
-            user = new User();
-            site = new Site();
+            return ok(views.html.notReady.render(configuration.getSiteName()));
         }
         return ok(views.html.authors.render(site.getName(), "", user, site, toContentPage(response)));
     }

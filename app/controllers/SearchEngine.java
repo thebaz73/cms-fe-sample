@@ -32,8 +32,7 @@ public class SearchEngine extends SparkleController {
                     .get();
         } catch (ConfigurationException e) {
             Logger.error("Searching contents", e);
-            user = new User();
-            site = new Site();
+            return ok(views.html.notReady.render(configuration.getSiteName()));
         }
         return ok(views.html.search.render(site.getName(), "", user, site, toContentPage(response)));
     }}
