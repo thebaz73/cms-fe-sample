@@ -1,0 +1,28 @@
+@(title: String)(t: Throwable)
+
+@main(title, "", "") {
+
+
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/assets/images/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>500</h1>
+                        <hr class="small">
+                        <span class="subheading">Internal server error</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="well">
+                <h1 class="text-center"><small>@t.getLocalizedMessage</small></h1>
+            </div>
+        </div>
+    </div>
+}

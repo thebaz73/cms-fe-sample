@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="stylesheets/jqcloud.min.css"/>
+    <script type="application/javascript" src="javascripts/jquery.min.js"></script>
+    <style>
+        .container {
+            border: 1px solid #ccc;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<script type="application/javascript" src="javascripts/jqcloud.min.js"></script>
+<!--<div id="keywords" class="container"></div>
+<script type="application/javascript">
+    var words = [
+        {text: 'Zero', weight: 0, link: '/tags/zero'},
+        {text: 'Minus three', weight: -3, link: '/tags/minus_three'},
+        {text: 'Minus point fiftyfive', weight: -0.55, link: '/tags/minus_point_fiftyfive'},
+        {text: 'Two', weight: '2.0', link: '/tags/two'}
+    ];
+    $('#keywords').jQCloud(words);
+</script>-->
+<div id="keywords" class="container"></div>
+<script type="application/javascript">
+    var words = [];
+    for(var i= 0; i < 15; i++) {
+        obj = {text: 'Text'+(i+1), weight: i*i, link: '/tags/text'+(i+1)};
+        words.push(obj);
+    }
+
+    $('#keywords').jQCloud(words ,{
+        width: 500,
+        height: 350
+    });
+</script>
+</body>
+</html>

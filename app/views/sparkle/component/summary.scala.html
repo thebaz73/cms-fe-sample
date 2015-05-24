@@ -1,0 +1,15 @@
+@(content: model.Content, user: model.User, site: model.Site)
+
+<div class="post-preview">
+    <a href="/contents/@content.getUri">
+        <h2 class="post-title">@content.getTitle</h2>
+        <h3 class="post-subtitle" data-toggle="tooltip" data-placement="left" title="@Html(content.getSummary)">@Html(content.getSummary(100))</h3>
+    </a>
+    <p class="post-meta">Posted by <a href="/authors/@user.getId">@user.getName</a> on @content.getModificationDate</p>
+    <p class="post-meta">
+        @for(tag <- content.getTags) {
+            <a class="badge" href="/tags/@tag.getUri">@tag.getTag</a>
+        }
+    </p>
+</div>
+<hr/>

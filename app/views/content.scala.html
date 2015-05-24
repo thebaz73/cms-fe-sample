@@ -1,0 +1,28 @@
+@(title: String, uri: String, user: model.User, site: model.Site, content: model.ContentPage)
+
+@main(title, content.toContent.getTitle, user.getName) {
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/assets/images/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>@content.toContent.getTitle</h1>
+                        <h2 class="subheading">@content.toContent.getSummary</h2>
+                        <span class="meta">Posted by <a href="/authors/@user.getId">@user.getName</a> on @content.toContent.getModificationDate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <div class="container">
+        <div class="row">
+            <article class="col-lg-7 col-md-10 col-md-offset-1">
+            @Html(content.toContent.getContent)
+            </article>
+            @sparkle.component.tagcloud.render("col-sm-3 col-md-3 well", site)
+        </div>
+    </div>
+}

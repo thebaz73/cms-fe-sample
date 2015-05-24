@@ -1,0 +1,30 @@
+@(title: String, uri: String, user: model.User, site: model.Site, contents: model.ContentPage)
+
+    @main(title, site.getName, user.getName) {
+        <!-- Set your background image for this header on the line below. -->
+        <header class="intro-header" style="background-image: url('/assets/images/home-bg.jpg')">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <div class="page-heading">
+                            <h1>Tags</h1>
+                            <hr class="small">
+                            <span class="subheading">@contents.getTag.getTag</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-7 col-md-10 col-md-offset-1">
+                @for(content <- contents.toContentList) {
+                    @sparkle.component.summary.render(content, user, site)
+                }
+                </div>
+                @sparkle.component.tagcloud.render("col-sm-3 col-md-3 well", site)
+            </div>
+        </div>
+    }

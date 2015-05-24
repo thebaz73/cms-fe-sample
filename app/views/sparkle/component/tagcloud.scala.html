@@ -1,0 +1,28 @@
+@(keywordClass: String, site: model.Site)
+
+<div id="keywords-@site.getId" class="@keywordClass"></div>
+<script src="@routes.Assets.at("javascripts/jqcloud.min.js")"></script>
+<script type="application/javascript">
+    var words = [];
+    var selector = '#keywords-@site.getId';
+    $.ajax({
+        url: "/tags",
+        type: "GET",
+        dataType: "json",
+        cache: false,
+        success: function(data) {
+            for(var i = 0; i <  data.length; i++) {
+                var word = {};
+                word.text = data[i].tag;
+                word.weight = data[i].popularity;
+                word.link = "/tags/" + data[i].uri;
+                words.push(word);
+            }
+            $(selector).jQCloud(words,{
+                height: 180,
+                removeOverflowing: false
+            });
+        }
+    });
+
+</script>

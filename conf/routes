@@ -1,0 +1,20 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET        /                     controllers.Application.index()
+# Extract the page parameter from the path.
+GET        /contact              controllers.Application.contact()
+GET        /about                controllers.Application.about()
+GET        /contents/:uri        controllers.Application.show(uri)
+GET        /authors/:id          controllers.Authors.show(id)
+GET        /tags             controllers.Tags.tags()
+GET        /tags/:tag        controllers.Tags.show(tag)
+
+POST       /sendMail             controllers.Mailer.send()
+GET        /search               controllers.SearchEngine.search(q)
+# Map static resources from the /public folder to the /assets URL path
+GET        /assets/*file         controllers.Assets.at(path="/public", file)
+GET        /webjars/*file        controllers.WebJarAssets.at(file)
+    
