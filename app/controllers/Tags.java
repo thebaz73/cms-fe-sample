@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * Created by bazzoni on 29/04/2015.
  */
 public class Tags extends SparkleController {
-    private static final String WS_URL = "http://ec2-52-17-75-152.eu-west-1.compute.amazonaws.com";
+    private static final String WS_URL = "http://192.168.108.130:9000";
     private static Configuration configuration = Configuration.getInstance();
 
     public static Result tags() throws ConfigurationException {
