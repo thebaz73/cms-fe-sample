@@ -1,4 +1,4 @@
-@(title: String, description: String, author: String)(content: Html)
+@(title: String, description: String, author: String, context: util.SparkleContext)(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +29,14 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/clean-blog.min.css")">
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/jqcloud.css")"/>
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <style type="text/css">
+            .home-header {
+                background-image: url('/assets/images/home-bg.jpg');
+            }
+            .post-header {
+            background-image: url('/assets/images/post-bg.jpg');
+            }
+        </style>
     </head>
     <body>
 
@@ -85,30 +93,46 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                         <ul class="list-inline text-center">
-                            <li>
-                                <a href="#">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
+                            @if(context.isActive("social.twitter")) {
+                                <li>
+                                    <a href="@context.getUri("social.twitter")" target="_blank">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                            @if(context.isActive("social.linkedin")) {
+                                <li>
+                                    <a href="@context.getUri("social.linkedin")" target="_blank">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                            @if(context.isActive("social.facebook")) {
+                                <li>
+                                    <a href="@context.getUri("social.facebook")" target="_blank">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                            @if(context.isActive("social.github")) {
+                                <li>
+                                    <a href="@context.getUri("social.github")" target="_blank">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                         <p class="copyright text-muted">Copyright &copy; Sparkle CMS 2014</p>
                     </div>

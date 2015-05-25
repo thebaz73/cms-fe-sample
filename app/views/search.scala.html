@@ -1,8 +1,8 @@
-@(title: String, uri: String, user: model.User, site: model.Site, contents: model.ContentPage)
+@(title: String, uri: String, user: model.User, site: model.Site, contents: model.ContentPage, context: util.SparkleContext)
 
-@main(title, site.getName, user.getName) {
+@main(title, site.getName, user.getName, context) {
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('/assets/images/home-bg.jpg')">
+    <header class="intro-header home-header">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -24,7 +24,9 @@
                 @sparkle.component.summary.render(content, user, site)
             }
             </div>
-            @sparkle.component.tagcloud.render("col-sm-3 col-md-3 well", site)
+            @if(context.isActive("component.tagcloud")) {
+                @sparkle.component.tagcloud.render("col-sm-3 col-md-3 well", site)
+            }
         </div>
     </div>
 }

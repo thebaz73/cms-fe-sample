@@ -11,6 +11,7 @@ scalaVersion := "2.11.1"
 libraryDependencies ++= Seq(
   javaCore,
   javaWs,
+  "com.typesafe" % "config" % "1.3.0",
   "org.webjars" %% "webjars-play" % "2.3.0-2",
   "org.webjars" % "bootstrap" % "3.1.1-2",
   "org.webjars" % "bootswatch-yeti" % "3.1.1",
