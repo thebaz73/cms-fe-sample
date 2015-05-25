@@ -21,12 +21,12 @@ public class Authors extends SparkleController {
     public static Result show(String id) throws ConfigurationException {
         User user;
         Site site;
-        F.Promise<WSResponse> response = null;
+        F.Promise<WSResponse> response;
         try {
             user = configuration.getUser();
             site = configuration.getSite();
 
-            String serviceUrl = String.format("%s/api/authors/%s/%s", sparkleContext.getContentURI(), site.getId(), id);
+            String serviceUrl = String.format("%s/api/authors/%s/%s", configuration.getSparkleContext().getContentURI(), site.getId(), id);
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();
@@ -34,7 +34,7 @@ public class Authors extends SparkleController {
             Logger.error("Getting author contents", e);
             return ok(views.html.notReady.render(configuration.getSiteName()));
         }
-        return ok(views.html.authors.render(site.getName(), "", user, site, toContentPage(response)));
+        return ok(views.html.authors.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext()));
     }
 
 }

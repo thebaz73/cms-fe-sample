@@ -1,8 +1,8 @@
 package util;
 
+import com.typesafe.config.Config;
 import model.Site;
 import model.User;
-import play.Play;
 import play.libs.Json;
 import play.libs.ws.WS;
 import play.libs.ws.WSAuthScheme;
@@ -33,11 +33,11 @@ public class Configuration {
         WSRequestHolder userRequest = WS.url(String.format("%s/public/user", sparkleContext.getRegistrationURI()));
         WSRequestHolder siteRequest = WS.url(String.format("%s/api/site", sparkleContext.getRegistrationURI()));
 
-        userRequest.setQueryParameter("param", "bazzoni.marco@gmail.com").get()
+        userRequest.setQueryParameter("param", sparkleContext.getWebmaster()).get()
                 .map(userResponse -> {
                     user = Json.fromJson(userResponse.asJson(), User.class);
                     siteRequest.setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
-                            .setQueryParameter("param", "halfblood.com")
+                            .setQueryParameter("param", sparkleContext.getSite())
                             .get()
                             .map(siteResponse -> {
                                 site = Json.fromJson(siteResponse.asJson(), Site.class);
@@ -63,5 +63,13 @@ public class Configuration {
 
     public String getSiteName() {
         return (site == null ? "" : site.getName());
+    }
+
+    public SparkleContext getSparkleContext() {
+        return sparkleContext;
+    }
+
+    public Config getConfig() {
+        return sparkleContext.getConfig();
     }
 }

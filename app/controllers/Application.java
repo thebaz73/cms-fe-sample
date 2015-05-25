@@ -35,21 +35,21 @@ public class Application extends SparkleController {
             Logger.error("Getting contact content", e);
             return ok(views.html.notReady.render(configuration.getSiteName()));
         }
-        return ok(views.html.contact.render(site.getName(), "", user, site));
+        return ok(views.html.contact.render(site.getName(), "", user, site, configuration.getSparkleContext()));
     }
 
     public static Result show(String uri) {
         User user;
         Site site;
-        F.Promise<WSResponse> response = null;
+        F.Promise<WSResponse> response;
         try {
             user = configuration.getUser();
             site = configuration.getSite();
             String serviceUrl;
             if (uri.equals("contents/") || uri.startsWith("contents/?")) {
-                serviceUrl = String.format("%s/api/contents/%s", sparkleContext.getContentURI(), site.getId());
+                serviceUrl = String.format("%s/api/contents/%s", configuration.getSparkleContext().getContentURI(), site.getId());
             } else {
-                serviceUrl = String.format("%s/api/contents/%s/%s", sparkleContext.getContentURI(), site.getId(), uri);
+                serviceUrl = String.format("%s/api/contents/%s/%s", configuration.getSparkleContext().getContentURI(), site.getId(), uri);
             }
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
@@ -59,9 +59,9 @@ public class Application extends SparkleController {
             return ok(views.html.notReady.render(configuration.getSiteName()));
         }
         if (uri.equals("contents/") || uri.startsWith("contents/?")) {
-            return ok(views.html.index.render(site.getName(), "", user, site, toContentPage(response)));
+            return ok(views.html.index.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext()));
         } else {
-            return ok(views.html.content.render(site.getName(), "", user, site, toContentPage(response)));
+            return ok(views.html.content.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext()));
         }
     }
 }

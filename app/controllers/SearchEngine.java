@@ -21,11 +21,11 @@ public class SearchEngine extends SparkleController {
     public static Result search(String q) throws ConfigurationException {
         User user;
         Site site;
-        F.Promise<WSResponse> response = null;
+        F.Promise<WSResponse> response;
         try {
             user = configuration.getUser();
             site = configuration.getSite();
-            String serviceUrl = String.format("%s/api/search?q=%s", sparkleContext.getContentURI(), q);
+            String serviceUrl = String.format("%s/api/search?q=%s", configuration.getSparkleContext().getContentURI(), q);
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();
@@ -33,5 +33,5 @@ public class SearchEngine extends SparkleController {
             Logger.error("Searching contents", e);
             return ok(views.html.notReady.render(configuration.getSiteName()));
         }
-        return ok(views.html.search.render(site.getName(), "", user, site, toContentPage(response)));
+        return ok(views.html.search.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext()));
     }}
