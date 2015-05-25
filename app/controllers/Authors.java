@@ -16,7 +16,6 @@ import util.ConfigurationException;
  * Created by bazzoni on 29/04/2015.
  */
 public class Authors extends SparkleController {
-    private static final String WS_URL = "http://192.168.108.130:9000";
     private static Configuration configuration = Configuration.getInstance();
 
     public static Result show(String id) throws ConfigurationException {
@@ -27,7 +26,7 @@ public class Authors extends SparkleController {
             user = configuration.getUser();
             site = configuration.getSite();
 
-            String serviceUrl = String.format("%s/api/authors/%s/%s", WS_URL, site.getId(), id);
+            String serviceUrl = String.format("%s/api/authors/%s/%s", sparkleContext.getContentURI(), site.getId(), id);
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();

@@ -16,7 +16,6 @@ import util.ConfigurationException;
  * Created by thebaz on 23/04/15.
  */
 public class Application extends SparkleController {
-    private static final String WS_URL = "http://192.168.108.130:9000";
     private static Configuration configuration = Configuration.getInstance();
 
     public static Result index() {
@@ -48,9 +47,9 @@ public class Application extends SparkleController {
             site = configuration.getSite();
             String serviceUrl;
             if (uri.equals("contents/") || uri.startsWith("contents/?")) {
-                serviceUrl = String.format("%s/api/contents/%s", WS_URL, site.getId());
+                serviceUrl = String.format("%s/api/contents/%s", sparkleContext.getContentURI(), site.getId());
             } else {
-                serviceUrl = String.format("%s/api/contents/%s/%s", WS_URL, site.getId(), uri);
+                serviceUrl = String.format("%s/api/contents/%s/%s", sparkleContext.getContentURI(), site.getId(), uri);
             }
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)

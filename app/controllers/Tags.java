@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
  * Created by bazzoni on 29/04/2015.
  */
 public class Tags extends SparkleController {
-    private static final String WS_URL = "http://192.168.108.130:9000";
     private static Configuration configuration = Configuration.getInstance();
 
     public static Result tags() throws ConfigurationException {
@@ -29,7 +28,7 @@ public class Tags extends SparkleController {
             user = configuration.getUser();
             site = configuration.getSite();
 
-            String serviceUrl = String.format("%s/api/tags/%s", WS_URL, site.getId());
+            String serviceUrl = String.format("%s/api/tags/%s", sparkleContext.getContentURI(), site.getId());
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();
@@ -48,7 +47,7 @@ public class Tags extends SparkleController {
             user = configuration.getUser();
             site = configuration.getSite();
 
-            String serviceUrl = String.format("%s/api/contents/%s?tag=%s", WS_URL, site.getId(), tag);
+            String serviceUrl = String.format("%s/api/contents/%s?tag=%s", sparkleContext.getContentURI(), site.getId(), tag);
             response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
                     .get();

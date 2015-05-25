@@ -7,6 +7,7 @@ import play.libs.F;
 import play.libs.Json;
 import play.libs.ws.WSResponse;
 import play.mvc.Controller;
+import util.SparkleContext;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  * Created by thebaz on 29/04/15.
  */
 public class SparkleController extends Controller {
+    protected final static SparkleContext sparkleContext = new SparkleContext();
     protected static ContentPage toContentPage(F.Promise<WSResponse> response) {
         ContentPage contents = new ContentPage();
         if(response != null) {

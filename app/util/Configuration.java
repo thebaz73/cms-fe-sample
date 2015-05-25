@@ -2,6 +2,7 @@ package util;
 
 import model.Site;
 import model.User;
+import play.Play;
 import play.libs.Json;
 import play.libs.ws.WS;
 import play.libs.ws.WSAuthScheme;
@@ -12,12 +13,13 @@ import play.libs.ws.WSRequestHolder;
  * Created by thebaz on 23/04/15.
  */
 public class Configuration {
-    public static final String WS_URL = "http://192.168.108.130:8000";
     private static Configuration instance;
+    private final SparkleContext sparkleContext;
     private User user;
     private Site site;
 
     private Configuration() {
+        sparkleContext = new SparkleContext();
     }
 
     public static Configuration getInstance() {
@@ -28,8 +30,8 @@ public class Configuration {
     }
 
     public void loadData() {
-        WSRequestHolder userRequest = WS.url(String.format("%s/public/user", WS_URL));
-        WSRequestHolder siteRequest = WS.url(String.format("%s/api/site", WS_URL));
+        WSRequestHolder userRequest = WS.url(String.format("%s/public/user", sparkleContext.getRegistrationURI()));
+        WSRequestHolder siteRequest = WS.url(String.format("%s/api/site", sparkleContext.getRegistrationURI()));
 
         userRequest.setQueryParameter("param", "bazzoni.marco@gmail.com").get()
                 .map(userResponse -> {

@@ -46,9 +46,8 @@ public class Global extends GlobalSettings {
     @Override
     public void onStart(Application application) {
         Logger.info("Sparkle FrontEnd starting...");
-        Akka.system().scheduler().schedule(
+        Akka.system().scheduler().scheduleOnce(
                 Duration.create(0, TimeUnit.MILLISECONDS),
-                Duration.create(10, TimeUnit.MILLISECONDS),
                 (Runnable) configuration::loadData,
                 Akka.system().dispatcher()
         );
