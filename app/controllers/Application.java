@@ -38,6 +38,11 @@ public class Application extends SparkleController {
         return ok(views.html.contact.render(site.getName(), "", user, site, configuration.getSparkleContext()));
     }
 
+    public static Result asset(String uri) {
+        String serviceUrl = String.format("%s/public/assets/%s", configuration.getSparkleContext().getContentURI(), uri);
+        return redirect(serviceUrl);
+    }
+
     public static Result show(String uri) {
         User user;
         Site site;
