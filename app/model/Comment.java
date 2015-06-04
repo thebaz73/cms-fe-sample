@@ -1,23 +1,15 @@
 package model;
 
-import play.data.validation.Constraints.*;
-
 import java.util.Date;
 
 /**
  * Comment
- * Created by bazzoni on 03/06/2015.
+ * Created by bazzoni on 04/06/2015.
  */
 public class Comment {
     private Date timestamp = new Date();
-    @Required
-    @Email
     private String email;
-    @Required
-    @MaxLength(50)
     private String title;
-    @Required
-    @MaxLength(250)
     private String content;
 
     public Date getTimestamp() {

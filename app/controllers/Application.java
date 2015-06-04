@@ -1,6 +1,6 @@
 package controllers;
 
-import model.Comment;
+import views.sparkle.component.CommentData;
 import model.Site;
 import model.User;
 import play.Logger;
@@ -45,12 +45,30 @@ public class Application extends SparkleController {
         return redirect(serviceUrl);
     }
 
-    public static Result comment(String id) {
-        // Get the submitted form data from the request object, and run validation.
-        Form<Comment> formData = Form.form(Comment.class).bindFromRequest();
-        if (!formData.hasErrors()) {
+    public static Result comment(String uri) {
+        User user;
+        Site site;
+        F.Promise<WSResponse> response;
+        try {
+            user = configuration.getUser();
+            site = configuration.getSite();
+            String serviceUrl = String.format("%s/api/contents/%s", configuration.getSparkleContext().getContentURI(), site.getId());
+
+            response = WS.url(serviceUrl)
+                    .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
+                    .get();
+        } catch (ConfigurationException e) {
+            Logger.error("Getting contents: " + uri, e);
+            return ok(views.html.notReady.render(configuration.getSiteName()));
         }
-        return show(id);
+        // Get the submitted form data from the request object, and run validation.
+        Form<CommentData> formData = Form.form(CommentData.class).bindFromRequest();
+        if (!formData.hasErrors()) {
+            return badRequest(views.html.content.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
+        }
+        else {
+            return ok(views.html.content.render(site. getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
+        }
     }
 
     public static Result show(String uri) {
@@ -76,7 +94,7 @@ public class Application extends SparkleController {
         if (uri.equals("contents/") || uri.startsWith("contents/?")) {
             return ok(views.html.index.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext()));
         } else {
-            Form<Comment> formData = Form.form(Comment.class).fill(new Comment());
+            Form<CommentData> formData = Form.form(CommentData.class).fill(new CommentData());
             return ok(views.html.content.render(site. getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
         }
     }

@@ -1,4 +1,5 @@
-@(title: String, uri: String, user: model.User, site: model.Site, content: model.ContentPage, context: util.SparkleContext, formData: Form[model.Comment])
+@import views.sparkle.component.CommentData
+@(title: String, uri: String, user: model.User, site: model.Site, content: model.ContentPage, context: util.SparkleContext, formData: Form[CommentData])
 
 @main(title, content.toContent.getTitle, user.getName, context) {
     <!-- Set your background image for this header on the line below. -->
@@ -19,7 +20,7 @@
     <!-- Post Content -->
     <div class="container">
         <div class="row">
-            <article class="col-lg-7 col-md-10 col-md-offset-1">
+            <article class="col-lg-9 col-md-9">
             @Html(content.toContent.getContent)
             </article>
             @if(context.isActive("component.tagcloud")) {
@@ -27,9 +28,11 @@
             }
         </div>
         <div class="row">
-        @helper.form(action = routes.Application.comment(content.toContent.getUri), 'class -> "form-horizontal col-lg-7 col-md-10 col-md-offset-1") {
-            @views.html.sparkle.component.comment(formData, content.toContent.getId)
-        }
+            @if(!content.toContent.getUri.equals("about")) {
+                @helper.form(action = routes.Application.comment(content.toContent.getUri), 'class -> "col-lg-9 col-md-9") {
+                    @views.html.sparkle.component.comment(formData, content.toContent.getId)
+                }
+            }
         </div>
     </div>
 }

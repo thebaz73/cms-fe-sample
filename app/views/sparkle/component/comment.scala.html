@@ -1,34 +1,33 @@
-@(formData: Form[model.Comment],
+@import views.sparkle.component.CommentData
+@(formData: Form[CommentData],
   id:       String)
 
-<fieldset>
-  <!-- Header -->
-  <div id="legend">
+<!-- Header -->
+<div id="legend">
     <legend>Add comment</legend>
-  </div>
+</div>
+<input type="hidden" name="contentId" value="@id">
+<!-- Email -->
+@views.html.sparkle.component.bootstrap3.email(formData("email"),
+    label = "Email",
+    placeholder = "Please enter your email. (required)",
+    help = "")
 
-   <!-- Email -->
-  @views.html.sparkle.component.bootstrap3.email(formData("enail"),
-        label = "Email",
-        placeholder = "...",
-        help = "Please enter your email. (required)")
+<!-- Title -->
+@views.html.sparkle.component.bootstrap3.text(formData("title"),
+    label = "Title",
+    placeholder = "Please enter your title. (required)",
+    help = "")
 
-   <!-- Title -->
-  @views.html.sparkle.component.bootstrap3.text(formData("enail"),
-        label = "Title",
-        placeholder = "...",
-        help = "Please enter your title. (required)")
-
-   <!-- Content -->
-  @views.html.sparkle.component.bootstrap3.textarea(formData("enail"),
-        rows = "5",
-        label = "Content",
-        placeholder = "...",
-        help = "Please enter your content. (required)")
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button id="submit" type="submit" value="Submit" class="btn btn-primary">Submit</button>
-      <button id="cancel" class="btn cancel">Cancel</button>
+<!-- Content -->
+@views.html.sparkle.component.bootstrap3.textarea(formData("content"),
+    rows = "5",
+    label = "Content",
+    placeholder = "Please enter your content. (required)",
+    help = "")
+<div class="form-group">
+    <div class="col-lg-12 col-sm-12">
+        <button id="submit" type="submit" value="Submit" class="btn btn-primary">Submit</button>
+        <button id="cancel" class="btn cancel">Cancel</button>
     </div>
-  </div>
-</fieldset>
+</div>

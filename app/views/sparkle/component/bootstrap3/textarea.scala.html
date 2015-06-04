@@ -1,15 +1,15 @@
 @(field: Field, rows: String = "3", label: String = "CHANGEME", placeholder: String = "", help: String = "")
 
-  <div class="form-group @if(field.hasErrors) {has-error}">
-    <label class="col-sm-2 control-label">@label</label>
-    <div class="col-sm-10">
-      <textarea class="form-control"
-                rows="@rows" 
-                id="@field.id" 
-                name="@field.name" 
-                placeholder="@placeholder" 
-                >@field.value.getOrElse("")</textarea>
-      <span class="help-block">@help</span>
-      <span class="help-block">@{field.error.map { error => error.message }}</span>
+<div class="row control-group @if(field.hasErrors) {has-error}">
+    <div class="form-group col-xs-12 floating-label-form-group controls">
+        <label>@label</label>
+        <textarea
+        class="form-control"
+        rows="@rows"
+        id="@field.id"
+        name="@field.name"
+        placeholder="@placeholder">@field.value.getOrElse("")</textarea>
+        <p class="help-block">@help</p>
+        <p class="help-block text-danger">@{field.error.map { error => error.message }}</p>
     </div>
-  </div>
+</div>
