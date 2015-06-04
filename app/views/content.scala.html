@@ -1,4 +1,4 @@
-@(title: String, uri: String, user: model.User, site: model.Site, content: model.ContentPage, context: util.SparkleContext)
+@(title: String, uri: String, user: model.User, site: model.Site, content: model.ContentPage, context: util.SparkleContext, formData: Form[model.Comment])
 
 @main(title, content.toContent.getTitle, user.getName, context) {
     <!-- Set your background image for this header on the line below. -->
@@ -25,6 +25,11 @@
             @if(context.isActive("component.tagcloud")) {
                 @sparkle.component.tagcloud.render("col-sm-3 col-md-3 well", site)
             }
+        </div>
+        <div class="row">
+        @helper.form(action = routes.Application.comment(content.toContent.getUri), 'class -> "form-horizontal col-lg-7 col-md-10 col-md-offset-1") {
+            @views.html.sparkle.component.comment(formData, content.toContent.getId)
+        }
         </div>
     </div>
 }

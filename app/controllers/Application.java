@@ -1,8 +1,10 @@
 package controllers;
 
+import model.Comment;
 import model.Site;
 import model.User;
 import play.Logger;
+import play.data.Form;
 import play.libs.F;
 import play.libs.ws.WS;
 import play.libs.ws.WSAuthScheme;
@@ -43,6 +45,14 @@ public class Application extends SparkleController {
         return redirect(serviceUrl);
     }
 
+    public static Result comment(String id) {
+        // Get the submitted form data from the request object, and run validation.
+        Form<Comment> formData = Form.form(Comment.class).bindFromRequest();
+        if (!formData.hasErrors()) {
+        }
+        return show(id);
+    }
+
     public static Result show(String uri) {
         User user;
         Site site;
@@ -66,7 +76,8 @@ public class Application extends SparkleController {
         if (uri.equals("contents/") || uri.startsWith("contents/?")) {
             return ok(views.html.index.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext()));
         } else {
-            return ok(views.html.content.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext()));
+            Form<Comment> formData = Form.form(Comment.class).fill(new Comment());
+            return ok(views.html.content.render(site. getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
         }
     }
 }

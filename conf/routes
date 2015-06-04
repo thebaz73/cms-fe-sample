@@ -13,6 +13,7 @@ GET        /authors/:id          controllers.Authors.show(id)
 GET        /tags                     controllers.Tags.tags()
 GET        /tags/:tag                controllers.Tags.show(tag)
 
+POST       /comment/:id              controllers.Application.comment(id)
 POST       /sendMail             controllers.Mailer.send()
 GET        /search               controllers.SearchEngine.search(q)
 # Map static resources from the /public folder to the /assets URL path

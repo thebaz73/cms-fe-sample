@@ -1,0 +1,34 @@
+@(formData: Form[model.Comment],
+  id:       String)
+
+<fieldset>
+  <!-- Header -->
+  <div id="legend">
+    <legend>Add comment</legend>
+  </div>
+
+   <!-- Email -->
+  @views.html.sparkle.component.bootstrap3.email(formData("enail"),
+        label = "Email",
+        placeholder = "...",
+        help = "Please enter your email. (required)")
+
+   <!-- Title -->
+  @views.html.sparkle.component.bootstrap3.text(formData("enail"),
+        label = "Title",
+        placeholder = "...",
+        help = "Please enter your title. (required)")
+
+   <!-- Content -->
+  @views.html.sparkle.component.bootstrap3.textarea(formData("enail"),
+        rows = "5",
+        label = "Content",
+        placeholder = "...",
+        help = "Please enter your content. (required)")
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button id="submit" type="submit" value="Submit" class="btn btn-primary">Submit</button>
+      <button id="cancel" class="btn cancel">Cancel</button>
+    </div>
+  </div>
+</fieldset>
