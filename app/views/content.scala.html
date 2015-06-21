@@ -30,7 +30,7 @@
         <div class="row">
             @if(!content.toContent.getUri.equals("about")) {
                 @helper.form(action = routes.Application.comment(content.toContent.getUri), 'class -> "col-lg-9 col-md-9") {
-                    @views.html.sparkle.component.comment(formData, content.toContent.getId)
+                    @views.html.sparkle.component.comment(formData, site.getId, content.toContent.getId)
                 }
             }
         </div>

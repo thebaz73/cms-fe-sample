@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class CommentData {
     public Date timestamp = new Date();
+    public String contentId;
+    public String siteId;
     public String email;
     public String title;
     public String content;
@@ -32,7 +34,6 @@ public class CommentData {
         if (content == null || content.length() == 0) {
             errors.add(new ValidationError("content", "No content was given."));
         }
-
 
         if(errors.size() > 0)
             return errors;

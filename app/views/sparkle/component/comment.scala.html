@@ -1,12 +1,14 @@
 @import views.sparkle.component.CommentData
 @(formData: Form[CommentData],
-  id:       String)
+  siteId:       String,
+  contentId:    String)
 
 <!-- Header -->
 <div id="legend">
     <legend>Add comment</legend>
 </div>
-<input type="hidden" name="contentId" value="@id">
+<input type="hidden" name="contentId" value="@contentId">
+<input type="hidden" name="siteId" value="@siteId">
 <!-- Email -->
 @views.html.sparkle.component.bootstrap3.email(formData("email"),
     label = "Email",
