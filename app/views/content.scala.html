@@ -1,5 +1,5 @@
 @import views.sparkle.component.CommentData
-@(title: String, uri: String, user: model.User, site: model.Site, content: model.ContentPage, context: util.SparkleContext, formData: Form[CommentData])
+@(title: String, uri: String, user: model.User, site: model.Site, content: model.ContentPage, context: util.SparkleContext, formData: play.data.Form[CommentData])
 
 @main(title, content.toContent.getTitle, user.getName, context) {
     <!-- Set your background image for this header on the line below. -->
