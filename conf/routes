@@ -12,9 +12,10 @@ GET        /sparkleasset/*uri    controllers.Application.asset(uri)
 GET        /authors/:id          controllers.Authors.show(id)
 GET        /tags                 controllers.Tags.tags()
 GET        /tags/:tag            controllers.Tags.show(tag)
+GET        /comments/:uri        controllers.Application.comment(uri)
 
-POST       /contents/:uri        controllers.Application.comment(uri)
-POST       /sendMail             controllers.Mailer.send()
+POST       /contents/:uri        controllers.Application.postComment(uri)
+POST       /sendMail             controllers.Mailer.sendMail()
 GET        /search               controllers.SearchEngine.search(q)
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file         controllers.Assets.at(path="/public", file)

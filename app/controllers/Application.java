@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.Json;
 import views.sparkle.component.CommentData;
 import model.Site;
@@ -13,6 +14,8 @@ import play.libs.ws.WSResponse;
 import play.mvc.Result;
 import util.Configuration;
 import util.ConfigurationException;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Application
@@ -46,7 +49,7 @@ public class Application extends SparkleController {
         return redirect(serviceUrl);
     }
 
-    public static Result comment(String uri) {
+    public static Result postComment(String uri) {
         User user;
         Site site;
         F.Promise<WSResponse> response;
@@ -68,7 +71,7 @@ public class Application extends SparkleController {
             return badRequest(views.html.content.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
         }
         else {
-            String serviceUrl = String.format("%s/api/comments", configuration.getSparkleContext().getContentURI());
+            String serviceUrl = String.format("%s/api/comments", configuration.getSparkleContext().getCommentURI());
 
             WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
@@ -77,6 +80,29 @@ public class Application extends SparkleController {
 
             return ok(views.html.content.render(site. getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
         }
+    }
+
+    public static JsonNode comment(String uri) {
+        User user;
+        JsonNode node = null;
+        try {
+            user = configuration.getUser();
+            String serviceUrl = String.format("%s/api/contents/%s", configuration.getSparkleContext().getCommentURI(), uri);
+
+            F.Promise<WSResponse> response = WS.url(serviceUrl)
+                    .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
+                    .get();
+            if(response != null) {
+                WSResponse wsResponse = response.get(30, TimeUnit.SECONDS);
+                if(wsResponse.getStatus() == 200) {
+                    node = wsResponse.asJson();
+                }
+            }
+        } catch (ConfigurationException e) {
+            Logger.error("Getting contents: " + uri, e);
+        }
+
+        return node;
     }
 
     public static Result show(String uri) {

@@ -27,6 +27,10 @@ public class SparkleContext {
         return config.getString("sparkle.ws.registration.uri");
     }
 
+    public String getCommentURI() {
+        return config.getString("sparkle.ws.comment.uri");
+    }
+
     public String getContentURI() {
         return config.getString("sparkle.ws.content.uri");
     }
