@@ -13,6 +13,7 @@ public class Site {
     private Long creationDate;
     private String address;
     private String workflowType;
+    private String commentApprovalMode;
     private User webMaster;
     private List<User> authors;
 
@@ -62,6 +63,14 @@ public class Site {
 
     public void setWorkflowType(String workflowType) {
         this.workflowType = workflowType;
+    }
+
+    public String getCommentApprovalMode() {
+        return commentApprovalMode;
+    }
+
+    public void setCommentApprovalMode(String commentApprovalMode) {
+        this.commentApprovalMode = commentApprovalMode;
     }
 
     public User getWebMaster() {

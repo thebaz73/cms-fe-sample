@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.libs.Json;
 import views.sparkle.component.CommentData;
 import model.Site;
@@ -67,7 +68,7 @@ public class Application extends SparkleController {
         }
         // Get the submitted form data from the request object, and run validation.
         Form<CommentData> formData = Form.form(CommentData.class).bindFromRequest();
-        if (!formData.hasErrors()) {
+        if (formData.hasErrors()) {
             return badRequest(views.html.content.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
         }
         else {
@@ -82,12 +83,11 @@ public class Application extends SparkleController {
         }
     }
 
-    public static JsonNode comment(String uri) {
-        User user;
-        JsonNode node = null;
+    public static Result comment(String uri) {
+        JsonNode node = Json.newObject();
         try {
-            user = configuration.getUser();
-            String serviceUrl = String.format("%s/api/contents/%s", configuration.getSparkleContext().getCommentURI(), uri);
+            User user = configuration.getUser();
+            String serviceUrl = String.format("%s/api/comments/%s", configuration.getSparkleContext().getCommentURI(), uri);
 
             F.Promise<WSResponse> response = WS.url(serviceUrl)
                     .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
@@ -102,7 +102,7 @@ public class Application extends SparkleController {
             Logger.error("Getting contents: " + uri, e);
         }
 
-        return node;
+        return ok(node);
     }
 
     public static Result show(String uri) {

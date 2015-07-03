@@ -29,14 +29,27 @@
         </div>
         <div class="row">
             @if(!content.toContent.getUri.equals("about")) {
-                @helper.form(action = routes.Application.comment(content.toContent.getUri), 'class -> "col-lg-9 col-md-9") {
+                @helper.form(action = routes.Application.postComment(content.toContent.getUri), 'class -> "col-lg-9 col-md-9") {
                     @views.html.sparkle.component.comment(formData, site.getId, content.toContent.getId)
                 }
             }
         </div>
-        <div class="row" id="comments"></div>
+        <section id="comments"></section>
     </div>
+	<script type="application/javascript" src="@routes.Assets.at("javascripts/handlebars-v3.0.3.js")"></script>
+	<script id="comment-template" type="text/x-handlebars-template">
+		<div class="row">
+			<div>{{title}}</div>
+			<div>{{content}}</div>
+		</div>
+    </script>
 	<script type="application/javascript">
-		//todo use handlebars.js for comments
+		var contentId = "@content.toContent.getId";
+		var source = $("#comment-template").html();
+		var template = Handlebars.compile(source);
+		$.get("/comments/"+contentId, function (template) {
+	        $('#comments').html(template(data));
+        });
+
 	</script>
 }
