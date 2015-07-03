@@ -102,7 +102,7 @@ public class Application extends SparkleController {
             Logger.error("Getting contents: " + uri, e);
         }
 
-        return ok(node);
+        return ok(node.get("_embedded"));
     }
 
     public static Result show(String uri) {

@@ -1,0 +1,72 @@
+{
+  "_links": {
+    "self": {
+      "href": "http://192.168.108.130:9000/api/comments/558877cbc4d7ba342a179f49{?page,size,sort}",
+      "templated": true
+    }
+  },
+  "_embedded": {
+    "cmsComments": [
+      {
+        "id": "5596f7c6e4b0e62b046dd725",
+        "approved": true,
+        "contentId": "558877cbc4d7ba342a179f49",
+        "timestamp": 1435957187188,
+        "title": "I'm sorry",
+        "content": "Hallo Mr. Riddle,\r\nyou are not here anymore!\r\n\r\nBye, bye!",
+        "viewer": {
+          "id": "5596f7c6e4b0e62b046dd724",
+          "name": "ron@good.com",
+          "email": "ron@good.com",
+          "username": "ron@good.com",
+          "password": "",
+          "creationDate": 1435957190227,
+          "roles": [
+            {
+              "id": "5588319ac4d79b8578bfa587",
+              "role": "ROLE_USER"
+            },
+            {
+              "id": "5588319ac4d79b8578bfa58b",
+              "role": "ROLE_VIEWER"
+            }
+          ],
+          "authoredSiteId": null
+        }
+      },
+      {
+        "id": "5596de56e4b0eeadbe158860",
+        "approved": true,
+        "contentId": "558877cbc4d7ba342a179f49",
+        "timestamp": 1435950943241,
+        "title": "It was tough",
+        "content": "It was tough to find and destroy all those fucking Horcrux...",
+        "viewer": {
+          "id": "5596de56e4b0eeadbe15885f",
+          "name": "harry@good.com",
+          "email": "harry@good.com",
+          "username": "harry@good.com",
+          "password": "",
+          "creationDate": 1435950678233,
+          "roles": [
+            {
+              "id": "5588319ac4d79b8578bfa587",
+              "role": "ROLE_USER"
+            },
+            {
+              "id": "5588319ac4d79b8578bfa58b",
+              "role": "ROLE_VIEWER"
+            }
+          ],
+          "authoredSiteId": null
+        }
+      }
+    ]
+  },
+  "page": {
+    "size": 10,
+    "totalElements": 2,
+    "totalPages": 1,
+    "number": 0
+  }
+}
