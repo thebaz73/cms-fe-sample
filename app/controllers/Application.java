@@ -1,5 +1,6 @@
 package controllers;
 
+import play.libs.Json;
 import views.sparkle.component.CommentData;
 import model.Site;
 import model.User;
@@ -67,6 +68,13 @@ public class Application extends SparkleController {
             return badRequest(views.html.content.render(site.getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
         }
         else {
+            String serviceUrl = String.format("%s/api/comments", configuration.getSparkleContext().getContentURI());
+
+            WS.url(serviceUrl)
+                    .setAuth(user.getUsername(), user.getPassword(), WSAuthScheme.BASIC)
+                    .setContentType("application/json")
+                    .post(Json.toJson(formData.get()));
+
             return ok(views.html.content.render(site. getName(), "", user, site, toContentPage(response), configuration.getSparkleContext(), formData));
         }
     }
